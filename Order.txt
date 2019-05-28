@@ -1,0 +1,27 @@
+Tiger
+Gorilla
+Snake, 30, 3, 40, 70, 80, 1,
+Scorpion
+Spider
+Bear
+Unicorn
+Orc
+Goblin
+Cyclops
+Wizard
+Werewolf
+Vampire
+Giant
+Leprichaun
+Ghost
+Zombie
+Witch
+Illusion
+
+Attack
+Health
+speed (rate of attack)
+Chance of escape
+Chance of hit
+Chance of encounter
+Effect

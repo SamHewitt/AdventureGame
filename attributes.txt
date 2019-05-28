@@ -1,0 +1,6 @@
+Nothing, 0, 0
+Poison, 20, 2
+
+
+Attack per turn
+Ammount of turns lasted
