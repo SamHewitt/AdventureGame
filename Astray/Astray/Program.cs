@@ -46,7 +46,27 @@ namespace Astray
             do // Menu will always appear at the end of any method chosen
             {
                 Console.Clear();
-                Console.WriteLine("dev menu\n1. load\n2. view mobs loaded\n3. Grid generation\n0. exit");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("                   ▄▄▄        ██████ ▄▄▄█████▓ ██▀███   ▄▄▄     ▓██   ██▓");
+                Console.WriteLine("                  ▒████▄    ▒██    ▒ ▓  ██▒ ▓▒▓██ ▒ ██▒▒████▄    ▒██  ██▒");
+                Console.WriteLine("                  ▒██  ▀█▄  ░ ▓██▄   ▒ ▓██░ ▒░▓██ ░▄█ ▒▒██  ▀█▄   ▒██ ██░");
+                Console.WriteLine("                  ░██▄▄▄▄██   ▒   ██▒░ ▓██▓ ░ ▒██▀▀█▄  ░██▄▄▄▄██  ░ ▐██▓░");
+                Console.WriteLine("                   ▓█   ▓██▒▒██████▒▒  ▒██▒ ░ ░██▓ ▒██▒ ▓█   ▓██▒ ░ ██▒▓░");
+                Console.WriteLine("                   ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░  ▒ ░░   ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░  ██▒▒▒ ");
+                Console.WriteLine("                    ▒   ▒▒ ░░ ░▒  ░ ░    ░      ░▒ ░ ▒░  ▒   ▒▒ ░▓██ ░▒░ ");
+                Console.WriteLine("                    ░   ▒   ░  ░  ░    ░        ░░   ░   ░   ▒   ▒ ▒ ░░ ");
+                Console.WriteLine("                        ░  ░      ░              ░           ░  ░░ ░ ");
+                Console.WriteLine("                                                                 ░ ░ ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("======================================================================================");
+                Console.WriteLine("                               |                         |");
+                Console.WriteLine("                               |   1   Load              |");
+                Console.WriteLine("                               |   2   View Mobs         |");
+                Console.WriteLine("                               |   3   Grid Generation   |");
+                Console.WriteLine("                               |   0   Exit              |");
+                Console.WriteLine("                               |                         |");
+                Console.WriteLine("                               |                         |");
+                Console.WriteLine("======================================================================================");
                 choice = Console.ReadLine();
                 switch (choice)
                 {
