@@ -1,0 +1,232 @@
+(name)
+(Damage)
+(Durability)
+
+(Knives)
+M9 Bayonet Knive
+20
+10
+OKC-3S Knife
+15
+10
+Ka-Bar Knife
+20
+8
+Strider SMF Knife
+30
+5
+SEAL Knife
+50
+5
+Tomahawk
+100
+1
+
+(List Of Pistols)
+
+Beretta M9 Pistol
+40
+4
+Glock M007
+40
+3
+M45A1 Pistol
+45
+4
+P226 Pistol
+45
+4
+M15 Pistol
+40
+5
+M1851 Colt Pistol
+25
+6
+M1900 Pistol
+20
+8
+Remmington Revolver
+40
+6
+Smith & Wesson K-38 Pistol
+45
+6
+1836 flintlock Pistol
+100
+1
+
+(List of Rifles)
+
+M16A4 Rifle
+35
+15
+M16A3 Rifle
+35
+15
+M16A2 Rifle
+35
+15
+M27 IAR Rifle
+40
+15
+SCAH-H Rifle
+40
+10
+HK417 Rifle
+45
+8
+FN-FAL Rifle
+35
+10
+M1918 BAR
+50
+25
+
+(Sniper Rifles)
+
+M39 Marksman Rifle
+50
+5
+Remmington Modular Sniper Rifle
+80
+3
+Remington Model 700 Sniper Rifle
+75
+3
+M110 SASS Sniper Rifle
+65
+6
+Barrett 50 Cal Anti-Tank Rifle
+100
+10
+
+(Bolt Action Rifles)
+
+M1903 Bolt Action Rifle
+70
+2
+M1917 Enfield Bolt Action Rifle
+65
+3
+M1885 Bolt Action Rifle
+70
+3
+M1895 Bolt Action Rifle
+65
+4
+
+(Carbines)
+
+M4 Carbine
+40
+10
+MK 18 Mod 0 Carbine
+45
+5
+MK 16 Mod 0 Carbine
+45
+5
+SCAR-L Carbine
+45
+10
+CAR-15 Carbine
+50
+9
+M2 Carbine
+40
+8
+M3 Carbine
+40
+8
+M50 Reising
+45
+8
+XM8 Compact Carbine
+50
+15
+
+(Shotguns)
+
+M500 Pump Action Shotgun
+95
+3
+M590 Pump Action Shotgun
+95
+3
+M590A1 Pump Action Shotgun
+100
+3
+M1014 Semi-Auto Shotgun
+65
+10
+M870 MCS Combat Shotgun
+85
+5
+AA-12 Full-Auto Shotgun
+30
+30
+
+(Sub Machine Guns)
+
+MP5K SMG
+20
+20
+MP5 SMG
+20
+20
+MP2000
+25
+15
+M2 SMG
+25
+15
+MK 24 Mod 0 SMG
+25
+20
+Uzi
+35
+20
+M1921 Thompson SMG
+60
+15
+
+(Launchers)
+
+M72A5 Anti-Tank Launcher
+100
+1
+M72A6 Anti-Tank Launcher
+100
+1
+M72A7 Anti-Tank Launcher
+100
+1
+M72A8 Anti-Tank Launcher
+100
+1
+M72A9 Anti-Tank Launcher
+100
+1
+M32-MGL Grenade Launcher
+100
+6
+M320 GLM Grenade Launcher
+100
+3
+M72 LAW Rocket Launcher
+100
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
