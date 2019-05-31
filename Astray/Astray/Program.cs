@@ -80,7 +80,7 @@ namespace Astray
                         GenerateGrid(ref Collum);
                         Grid(Collum);
                         Console.ReadLine();
-                        
+
                         break;
                     case "0":
                         break;
@@ -101,7 +101,7 @@ namespace Astray
 
             StreamReader sr = new StreamReader("mobs.txt");
             int count = 0;
-            
+
             while (!sr.EndOfStream)
             {
                 Array.Resize(ref Mobs, Mobs.Length + 1);
@@ -117,7 +117,7 @@ namespace Astray
                 count++;
             }
         }
-        
+
         static void View(Mobs[] Mobs) // To be deleted later on, for testing purposes
         {
             Console.Clear();
@@ -127,14 +127,14 @@ namespace Astray
                 Console.WriteLine("Encounter: " + Mobs[i].encounter);
                 Console.WriteLine("Been Hit: " + Mobs[i].beenhit);
                 Console.WriteLine("Hit Mob: " + Mobs[i].hit);
-                Console.WriteLine("Evade Mob: "+ Mobs[i].evade);
-                Console.WriteLine("Evade Fail: " +Mobs[i].evadefail);
+                Console.WriteLine("Evade Mob: " + Mobs[i].evade);
+                Console.WriteLine("Evade Fail: " + Mobs[i].evadefail);
                 Console.WriteLine("Killed: " + Mobs[i].killed);
                 Console.WriteLine();
             }
             Console.ReadLine();
         }
-        
+
         static void Grid(Grid[] Collum)
         {
             for (int col = 0; col < Collum.Length; col++)
@@ -233,6 +233,6 @@ namespace Astray
                 }
             } while (noexit == true);
         }
-        
+
     }
 }
