@@ -217,6 +217,104 @@ M72 LAW Rocket Launcher
 100
 1
 
+(Wands)
+
+WabbaJack Wand
+100
+3
+Reapers Wand
+80
+4
+Fireweaver Wand
+75
+3
+Primitive Wand
+70
+2
+Magic Stick
+50
+3
+Bone Wand
+65
+3
+
+(Staffs)
+
+Battle Staff
+80
+4
+Water Staff
+75
+3
+Earth Staff
+75
+3
+Water Staff
+75
+3
+Fire Staff
+75
+3
+Star Bringer Staff
+100
+2
+Terror Cane
+100
+2
+Corrupted Spirit Staff
+100
+4
+
+(Rings)
+
+Ring of Eternity
+60
+10
+Ring of Enlightenment
+80
+8
+Ring of the Phantom
+75
+8
+Ring of Illusion
+65
+10
+Ring of Destruction
+100
+6
+Ring of the Storm
+100
+5
+Blood Forged Ring
+100
+4
+Ring of the Arcane
+85
+5
+
+(Swords)
+
+Bronze Sword
+30
+5
+Stone Sword
+60
+5
+Iron Sword
+75
+8
+Gold Sword
+75
+3
+Diamond Sword
+100
+5
+
+
+
+
+
+
 
 
 
