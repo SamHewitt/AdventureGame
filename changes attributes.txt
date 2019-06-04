@@ -1,0 +1,119 @@
+new file mode 100644
+@@ -0,0 +1,115 @@
++
++------------------------------------------------------------------------------------------------------------------------------------------
++-Starting Characters :
++------------------------------------------------------------------------------------------------------------------------------------------
++-
++-Fighter Classes (*bruisers/tanks*) :
++-- Berserker (Has a rage effect that once it kills an enemy it buffs strength and does a warcry that weakens enemies defences, aka bloodlust)
++-- Duelist (best at fighting 1v1 buff, can critical hit, Can full counter an attack for twice the amount of damage very unlikely, move is called Full counter)
++-- Knight (Tanky knight with starter armor, gains +(armor) for each enemy)
++-- Commando (Call in an drone airstrike)
++-- Paladin (Healing, Tank, Grants high attack against creatures in the dark, Hammer)
++-
++-Assassin (*high speed and high damage, DPS):
++--Thief (has greater chance to steal items, escape, and gold increase upon kill)
++--Ninja (greater chance to sneak attack and crit enemys)
++--Trickster (greater chance of persuasion, does bleed damage, can subdue enemys)
++--Rogue (Has a hidden blade that cannot be broken and can 
++-
++-Mages(*aoe, area of effect*):
++-- Witch 
++-- Wizard 
++-- Conjurer (Can summon creatures depending on current level, and )
++-- Druid (Can Heal, Nature buff, can subdue enemys aka using tree roots to snare enemies, knows the environment)
++-
++-Other 
++-- The alchemist (does huge combo damage, using a turn to throw oil over the enemy, then lighting it with fire, water with electricity)
++-- Ranger (Headshot: Does triple damage, Cannot Critical Strike, increased chance of evasion) 
++-----------------------------------------------------------------------------------------------------------------------------------------
++-Starting stats
++-----------------------------------------------------------------------------------------------------------------------------------------
++-++++++++++++++++++++++++++++++++++++++++++++++++++
++-Base Attack - 15-45
++-Health- 70-140
++-Spell Damage- aoe (area of effect)
++-speed (rate of attack),15-35 (out of 100)
++-Chance of escape (out of 100)
++-Chance to Dodge (out of 100)
++-Effect (e.g. Dot(damage over time), weaknesses)
++-poison resistance (out of 100)
++-bleed resistance (out of 100)
++-Weakness resistance (out of 100)
++-Chance to Critical strike (out of 100)
++-++++++++++++++++++++++++++++++++++++++++++++++++++
++-
++-Fighter Classes:
++-- Berserker --> Base Attack=20; Spell Damage(axe cleave)      =15;                                     Health=120, speed=25; Chance of escape=17; Chance to Dodge=20; Bleed Resistance=30; Weakness curse resistance=15; Poison Resistance=15; Chance to Critical Strike=10;
++-- Duelist -->   Base Attack=25; Spell Damage(piercing blade)  =10+(bleed- 40% of attack for 3 turns);  Health=110, speed=25; Chance of escape=20; Chance to Dodge=25; Bleed Resistance=30; Weakness curse resistance=15; Poison Resistance=15; Chance to Critical Strike=10;
++-- Knight -->    Base Attack=30; Spell Damage(charging bash)   =10;                                     Health=130, speed=25; Chance of escape=15; Chance to Dodge=20; Bleed Resistance=30; Weakness curse resistance=15; Poison Resistance=15; Chance to Critical Strike=10;
++-- Commando -->  Base Attack=23; Spell Damage(IED bomb trigger)=30;                                     Health=110, speed=25; Chance of escape=15; Chance to Dodge=20; Bleed Resistance=30; Weakness curse resistance=15; Poison Resistance=15; Chance to Critical Strike=10;
++-- Paladin -->   Base Attack=20; Spell Damage(Holy Smite)      =15;                                     Health=120, speed=25; Chance of escape=15; Chance to Dodge=20; Bleed Resistance=30; Weakness curse resistance=15; Poison Resistance=15; Chance to Critical Strike=10;
++-
++-Assassin:
++- 
++--Thief -->      Base Attack=27; Spell Damage(tripwire)            =20; Health=105;speed=30; Chance of escape=30; Chance to Dodge=30; Bleed Resistance=10; Weakness curse resistance=15; Poison Resistance=25; Chance to Critical Strike=25;
++--Ninja -->      Base Attack=35; Spell Damage(shuriken throw)      =12; Health=80; speed=30; Chance of escape=28; Chance to Dodge=28; Bleed Resistance=10; Weakness curse resistance=15; Poison Resistance=30; Chance to Critical Strike=20;
++--Trickster -->  Base Attack=32; Spell Damage(explosive cards trap)=15; Health=85; speed=30; Chance of escape=35; Chance to Dodge=25; Bleed Resistance=10; Weakness curse resistance=20; Poison Resistance=30; Chance to Critical Strike=25;
++--Rogue -->      Base Attack=37; Spell Damage(Throwing knives)     =10; Health=80; speed=30; Chance of escape=28; Chance to Dodge=27; Bleed Resistance=10; Weakness curse resistance=17; Poison Resistance=30; Chance to Critical Strike=20;
++-
++-Mages:
++-
++-- Witch -->	Base Attack=10; Spell Damage(Undead Curse)    =30+(weaken);                          Health=80, speed=20; Chance of escape=20; Chance to Dodge=15; Bleed Resistance=; Weakness curse resistance=40; Poison Resistance=15; Chance to Critical Strike=5;
++-- Wizard -->	Base Attack=13; Spell Damage(Firestrike)      =40;            		             Health=80, speed=20; Chance of escape=15; Chance to Dodge=15; Bleed Resistance=; Weakness curse resistance=40; Poison Resistance=15; Chance to Critical Strike=5;
++-- Conjurer -->	Base Attack=14; Spell Damage(Blood pact)      =27;            		             Health=90, speed=20; Chance of escape=15; Chance to Dodge=15; Bleed Resistance=; Weakness curse resistance=30; Poison Resistance=30; Chance to Critical Strike=5;
++-  +Special summons (summons a minion to fight for it... to be decided)
++-- Druid -->	Base Attack=10; Spell Damage(Entangling roots)=33+(30% chance to snare for 3 turns); Health=95, speed=20; Chance of escape=20; Chance to Dodge=15; Bleed Resistance=; Weakness curse resistance=30; Poison Resistance=30; Chance to Critical Strike=5;
++-
++-Other:
++-
++-- Alchemist --> Base Attack=18; Spell Damage=20(oil burn/perma Freeze + base Attack for combo and (DOT damage/stun)); Health=100; speed=25; Chance of escape=15; Chance to Dodge=20; Bleed Resistance=20; Weakness curse resistance=20; Poison Resistance=20; Chance to Critical Strike=15;
++-- Ranger -->	Base Attack=35; Spell Damage=10(Headshot Homing arrow + (50% of current attack));                     Health=100; speed=25; Chance of escape=23; Chance to Dodge=35; Bleed Resistance=25; Weakness curse resistance=20; Poison Resistance=20; Chance to Critical Strike=20;
++-
++-
++-----------------------------------------------------------------------------------------------------------------------------------------
++-Enemies
++-----------------------------------------------------------------------------------------------------------------------------------------
++-Highwayman
++-Leopard 
++-Tiger
++-Gorilla
++-Snake
++-Scorpion
++-Spider
++-Bear
++-Unicorn
++-Orc
++-Goblin
++-Cyclops
++-Wizard
++-Werewolf
++-Vampire (lifesteal effect, weak to fire and paladins)
++-Giant
++-Leprichaun
++-Ghost
++-Zombie
++-Witch (summons minions)
++-Illusion
++-acidic slime
++-Ogre
++-Dragon
++-Thieves
++-
++-----------------------------------------------------------------------------------------------------------------------------------------
++-Stats and Status Effects Template
++-----------------------------------------------------------------------------------------------------------------------------------------
++-Attack
++-Health
++-speed (rate of attack)
++-Chance of escape
++-Chance of hit
++-Chance of encounter
++-Effect (e.g. Dot(damage over time), weaknesses)
++-Chance to poison
++-Chance to bleed
++-Chance to Weaken
++-Chance to Critical strike
+\ No newline at end of file
+
