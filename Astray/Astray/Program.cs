@@ -18,8 +18,9 @@ namespace Astray
         public string evadefail; // Failed evading mob
         public string killed; // Death message
     }
-        struct EntitycharacterStats // Base assigned stats for chosen character
+        struct Characters // Base assigned stats for chosen character
     {
+        public string Name;
         public double Baseattack;
         public double Health; 
         public double Spelldamage; // Aoe (area off effect) damage 
@@ -42,7 +43,9 @@ namespace Astray
 
     public struct Items // Items
     {
-
+        public string name;
+        public int damage;
+        public int durabillity;
     }
 
     public struct Grid
@@ -50,19 +53,32 @@ namespace Astray
         public bool[] searched;
         public bool[] exit;
         public bool[] npc;
+        public bool[] weapon;
+        public bool[] mob;
+        public bool[] food;
     }
     class Program
     {
         static void Main()
-        {   
-            Menu();
-        }
-
-        static void Menu()
         {
             Mobs[] Mobs = new Mobs[0];
+            Items[] Items = new Items[0];
             Items[] Inventory = new Items[8];
             Grid[] Collum = new Grid[0];
+            Characters[] Selection = new Characters[0];
+            Load(ref Mobs, ref Items, ref Selection);
+
+            bool debug = false;
+            if (debug == true)
+            {
+                DebugMenu(Collum, Mobs, Items, Selection);
+            }
+            Story();
+            Menu(Mobs, Items, Inventory, Collum, Selection);
+        }
+
+        static void Menu(Mobs[] Mobs, Items[] Items, Items[] Inventory, Grid[] Collum, Characters[] Selection)
+        {
             string choice;
             do // Menu will always appear at the end of any method chosen
             {
@@ -81,35 +97,16 @@ namespace Astray
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("======================================================================================");
                 Console.WriteLine("                               |                         |");
-                Console.WriteLine("                               |   1   Load              |");
-                Console.WriteLine("                               |   2   View Mobs         |");
-                Console.WriteLine("                               |   3   Grid Generation   |");
+                Console.WriteLine("                               |   1   Play              |");
                 Console.WriteLine("                               |   0   Exit              |");
-                Console.WriteLine("                               |   4   Story Line        |");
                 Console.WriteLine("                               |                         |");
                 Console.WriteLine("======================================================================================");
                 choice = Console.ReadLine();
                 switch (choice)
                 {
                     case "1":
-                        Load(ref Mobs); // Calls Load Method
+                        Game(Mobs, Items, Collum, Inventory, Selection); // Calls Load Method
                         break;
-                    case "2":
-                        View(Mobs);
-                        break;
-
-                    case "3":
-                        GenerateGrid(ref Collum);
-                        Grid(Collum);
-                        Console.ReadLine();
-
-                        break;
-
-                    case "4":
-                        Console.Clear();
-                        Story();
-                        break;
-
                     case "0":
                         break;
                     default:
@@ -121,7 +118,7 @@ namespace Astray
             } while (choice != "0");
         }
 
-        static void Load(ref Mobs[] Mobs)
+        static void Load(ref Mobs[] Mobs, ref Items[] items, ref Characters[] Selection) // Loads All Data
         {
             // Reading in all mobs
             // Order of read in
@@ -130,7 +127,7 @@ namespace Astray
             StreamReader sr = new StreamReader("mobs.txt");
             int count = 0;
 
-            while (!sr.EndOfStream)
+            while (!sr.EndOfStream) // READING IN MOBS
             {
                 Array.Resize(ref Mobs, Mobs.Length + 1);
                 Mobs[count].name = sr.ReadLine();
@@ -144,83 +141,231 @@ namespace Astray
                 Mobs[count].killed = temp[4];
                 count++;
             }
-        }
+            sr.Close();
 
-        static void View(Mobs[] Mobs) // To be deleted later on, for testing purposes
-        {
-            Console.Clear();
-            for (int i = 0; i < Mobs.Length; i++)
+            StreamReader wr = new StreamReader("Weapons.txt");
+            count = 0;
+
+            while (!wr.EndOfStream) // READING IN WEAPONS
             {
-                Console.WriteLine("Name: " + Mobs[i].name);
-                Console.WriteLine("Encounter: " + Mobs[i].encounter);
-                Console.WriteLine("Been Hit: " + Mobs[i].beenhit);
-                Console.WriteLine("Hit Mob: " + Mobs[i].hit);
-                Console.WriteLine("Evade Mob: " + Mobs[i].evade);
-                Console.WriteLine("Evade Fail: " + Mobs[i].evadefail);
-                Console.WriteLine("Killed: " + Mobs[i].killed);
-                Console.WriteLine();
+                Array.Resize(ref items, items.Length + 1);
+                items[count].name = wr.ReadLine();
+                items[count].damage = Convert.ToInt32(wr.ReadLine());
+                items[count].durabillity = Convert.ToInt32(wr.ReadLine());
+                count++;
             }
-            Console.ReadLine();
+            wr.Close();
+
+            StreamReader cr = new StreamReader("Characters.txt");
+            count = 0;
+
+            while (!cr.EndOfStream)
+            {
+                Array.Resize(ref Selection, Selection.Length + 1);
+                Selection[count].Name = cr.ReadLine();
+                Selection[count].Baseattack = Convert.ToInt32(cr.ReadLine());
+                Selection[count].Health = Convert.ToInt32(cr.ReadLine());
+                Selection[count].Spelldamage = Convert.ToInt32(cr.ReadLine()); // Aoe (area off effect) damage 
+                Selection[count].Speed = Convert.ToInt32(cr.ReadLine()); // (rate of attack)
+                Selection[count].Escapechance = Convert.ToInt32(cr.ReadLine());
+                Selection[count].Dodgechance = Convert.ToInt32(cr.ReadLine());
+                Selection[count].Bleedresistance = Convert.ToInt32(cr.ReadLine());
+                Selection[count].Weaknessresistance = Convert.ToInt32(cr.ReadLine());
+                Selection[count].Poisonresistance = Convert.ToInt32(cr.ReadLine());
+                Selection[count].Criticalchance = Convert.ToInt32(cr.ReadLine());
+                count++;
+            }
+
+
         }
 
-        static void Grid(Grid[] Collum)
+        // GAME LOOP
+
+        static void Game(Mobs[] Mobs, Items[] Items, Grid[] Collum, Items[] Inventory, Characters[] Selection)
         {
-            for (int col = 0; col < Collum.Length; col++)
+            Characters[] Character = new Characters[1];
+            ChooseCharacter(Character, Selection);
+            GenerateGrid(ref Collum);
+
+            string choice;
+            int x = Collum.Length / 2, y = Collum[1].searched.Length / 2;
+
+            while (x > 0 || x < Collum.Length || y > 0 || y < Collum[1].searched.Length)
             {
-                for (int row = 0; row < Collum[0].exit.Length; row++)
+                Console.Clear();
+                Collum[x].searched[y] = true;
+                Gui(Collum, Inventory, Character, x, y);
+
+                choice = Console.ReadLine();
+                switch (choice.ToLower())
                 {
-                    if (Collum[col].searched[row] == true)
+                    case "w":
+                        if (x <= 0)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Outter Bounds");
+                        }
+                        else
+                        {
+                            x--;
+                        }
+                        break;
+                    case "a":
+                        if (y <= 0)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Outter Bounds");
+                        }
+                        else
+                        {
+                            y--;
+                        }
+                        break;
+                    case "s":
+                        if (x >= Collum.Length - 1)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Outter Bounds");
+                        }
+                        else
+                        {
+                            x++;
+                        }
+                        break;
+                    case "d":
+                        if (y >= Collum[1].searched.Length - 1)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Outter Bounds");
+                        }
+                        else
+                        {
+                            y++;
+                        }
+                        break;
+
+
+                        // commands that will be used to call the methods
+                        // each method will have an error check
+
+                    // so if someone said fight, the fight method would do an if statement saying if the current sector.animal = false,
+                    // meaning there is no animal, it will return, there is nothing to swing at
+
+
+                    case "fight":
+                    case "attack":
+                        break;
+                        
+                    case "run":
+                    case "leave":
+                    case "evade":
+                    case "sneak":
+                        break;
+
+                }
+            }
+        }
+
+        static void ChooseCharacter(Characters[] Character, Characters[] Selection)
+        {
+            Character = Selection; // SOMEONE DO CHOOSE CHARACTER CODE HERE SO IT ISNT HARD CODED
+        }
+        static void Gui(Grid[] Collum, Items[] Inventory, Characters[] Character, int x, int y)
+        {
+            Console.WriteLine();
+            for (int col = x - 5; col < x+5; col++)
+            {
+                for (int row = y - 5; row < y+5; row++)
+                {
+                    if (col < 0 || col > Collum.Length - 1 || row < 0 || row > Collum[1].searched.Length - 1)
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write("■ ");
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }
-                    else if (Collum[col].exit[row] == true)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.Write("■ ");
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }
-                    else if (Collum[col].npc[row] == true)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.Write("■ ");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("  ");
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.DarkGray;
-                        Console.Write("■ ");
-                        Console.ForegroundColor = ConsoleColor.White;
-
+                        if (Collum[col].searched[row] == true)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("■ ");
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            Console.Write("■ ");
+                        }
                     }
+                    
                 }
                 Console.WriteLine();
             }
             Console.WriteLine(Collum.Length);
             Console.WriteLine(Collum[0].npc.Length);
         }
-
+    
         static void GenerateGrid(ref Grid[] Collum)
         {
-            Console.Clear();
-            Console.WriteLine("Size of grid to create? (W x H)");
-            string[] temp = Console.ReadLine().Split('x');
-            Array.Resize(ref Collum, Convert.ToInt32(temp[1].Trim(' ')));
+            bool exit = false;
+            int rate = 0;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Choose Difficulty\n1. Easy\n2. Doable\n3. Impossible");
+                string choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "1":
+                        rate = 50;
+                        exit = true;
+                        break;
+                    case "2":
+                        rate = 20;
+                        exit = true;
+                        break;
+                    case "3":
+                        rate = 10;
+                        exit = true;
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Error. Try Again");
+                        Console.ReadLine();
+                        break;
+                }
+            } while (exit == false);
+
+
+
+            int[] temp = { 30, 30 };
+            int tmp = temp[1];
+            Array.Resize(ref Collum, temp[0]);
             for (int i = 0; i < Collum.Length; i++)
             {
-                Array.Resize(ref Collum[i].searched, Convert.ToInt32(temp[0].Trim(' ')));
-                Array.Resize(ref Collum[i].exit, Convert.ToInt32(temp[0].Trim(' ')));
-                Array.Resize(ref Collum[i].npc, Convert.ToInt32(temp[0].Trim(' ')));
+                Array.Resize(ref Collum[i].searched, tmp);
+                Array.Resize(ref Collum[i].exit, tmp);
+                Array.Resize(ref Collum[i].npc, tmp);
+                Array.Resize(ref Collum[i].weapon, tmp);
+                Array.Resize(ref Collum[i].mob, tmp);
+                Array.Resize(ref Collum[i].food, tmp);
             }
-            int npcRate = 15; //Change chances of sectors being exits or npc zones
-            int exitRate = 10;
+            int npcRate = rate * 1; //Change chances of sectors
+            int exitRate = rate * 2;
+            int weaponRate = rate * 4;
+            int mobRate = rate * 3;
+            int foodRate = rate * 8;
 
-            int npcCount = 0;
+            int npcCount = 0; //Count of weapons ammount
             int exitCount = 0;
+            int weaponCount = 0;
+            int mobCount = 0;
+            int foodCount = 0;
 
-            double npcLimit = Math.Sqrt(Collum.Length * Collum[0].npc.Length) * 2; //Change limits of sectors being exits or npc zones
+
+            double npcLimit = Math.Sqrt(Collum.Length * Collum[0].npc.Length) * 2; //Change limits of sectors
             double exitLimit = Math.Sqrt(Collum.Length * Collum[0].npc.Length) * 2;
+            double weaponLimit = Math.Sqrt(Collum.Length * Collum[0].npc.Length) * 10;
+            double mobLimit = Math.Sqrt(Collum.Length * Collum[0].npc.Length) * 8;
+            double foodLimit = Math.Sqrt(Collum.Length * Collum[0].npc.Length) * 4;
+
             int num;
             Random rand = new Random();
 
@@ -229,16 +374,38 @@ namespace Astray
                 for (int row = 0; row < Collum[0].exit.Length; row++)
                 {
                     num = rand.Next(1, 1001);
-                    if (num <= npcRate && npcCount < npcLimit)
-                    {
-                        Collum[col].npc[row] = true;
-                        npcCount++;
-                    }
-                    num = rand.Next(1, 1001);
                     if (num <= exitRate && exitCount < exitLimit)
                     {
                         Collum[col].exit[row] = true;
                         exitCount++;
+                    }
+
+                    num = rand.Next(1, 1001);
+                    if (num <= npcRate && npcCount < npcLimit && Collum[col].exit[row] == false)
+                    {
+                        Collum[col].npc[row] = true;
+                        npcCount++;
+                    }
+
+                    num = rand.Next(1, 1001);
+                    if (num <= weaponRate && weaponCount < weaponLimit && Collum[col].exit[row] == false && Collum[col].npc[row] == false)
+                    {
+                        Collum[col].weapon[row] = true;
+                        weaponCount++;
+                    }
+
+                    num = rand.Next(1, 1001);
+                    if (num <= mobRate && mobCount < mobLimit && Collum[col].exit[row] == false && Collum[col].npc[row] == false)
+                    {
+                        Collum[col].mob[row] = true;
+                        mobCount++;
+                    }
+
+                    num = rand.Next(1, 1001);
+                    if (num <= foodRate && foodCount < foodLimit && Collum[col].exit[row] == false && Collum[col].npc[row] == false && Collum[col].weapon[row] == false && Collum[col].mob[row] == false)
+                    {
+                        Collum[col].food[row] = true;
+                        foodCount++;
                     }
                 }
             }
@@ -263,9 +430,9 @@ namespace Astray
         }
 
 
-       public static void Story()
+        public static void Story()
         {
-            int time = 600;
+            int time = 200;
             for (int i = 0; i < 30; i++)
             {
                 Console.WriteLine();
@@ -310,5 +477,134 @@ namespace Astray
             sr.Close();
         }
 
+
+        // DEBUG STUFF !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+        static void DebugMenu(Grid[] Collum, Mobs[] Mobs, Items[] items, Characters[] Selection)
+        {
+            string choice;
+            do // Menu will always appear at the end of any method chosen
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("                   ▄▄▄        ██████ ▄▄▄█████▓ ██▀███   ▄▄▄     ▓██   ██▓");
+                Console.WriteLine("                  ▒████▄    ▒██    ▒ ▓  ██▒ ▓▒▓██ ▒ ██▒▒████▄    ▒██  ██▒");
+                Console.WriteLine("                  ▒██  ▀█▄  ░ ▓██▄   ▒ ▓██░ ▒░▓██ ░▄█ ▒▒██  ▀█▄   ▒██ ██░");
+                Console.WriteLine("                  ░██▄▄▄▄██   ▒   ██▒░ ▓██▓ ░ ▒██▀▀█▄  ░██▄▄▄▄██  ░ ▐██▓░");
+                Console.WriteLine("                   ▓█   ▓██▒▒██████▒▒  ▒██▒ ░ ░██▓ ▒██▒ ▓█   ▓██▒ ░ ██▒▓░");
+                Console.WriteLine("                   ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░  ▒ ░░   ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░  ██▒▒▒ ");
+                Console.WriteLine("                    ▒   ▒▒ ░░ ░▒  ░ ░    ░      ░▒ ░ ▒░  ▒   ▒▒ ░▓██ ░▒░ ");
+                Console.WriteLine("                    ░   ▒   ░  ░  ░    ░        ░░   ░   ░   ▒   ▒ ▒ ░░ ");
+                Console.WriteLine("                        ░  ░      ░              ░           ░  ░░ ░ ");
+                Console.WriteLine("                                                                 ░ ░ ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("======================================================================================");
+                Console.WriteLine("                               |                         |");
+                Console.WriteLine("                               |   1   Load              |");
+                Console.WriteLine("                               |   2   View Mobs         |");
+                Console.WriteLine("                               |   3   Grid Generation   |");
+                Console.WriteLine("                               |   0   Exit              |");
+                Console.WriteLine("                               |   4   Story Line        |");
+                Console.WriteLine("                               |                         |");
+                Console.WriteLine("======================================================================================");
+                choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "1":
+                        Load(ref Mobs, ref items, ref Selection); // Calls Load Method
+                        break;
+                    case "2":
+                        View(Mobs);
+                        break;
+
+                    case "3":
+                        GenerateGrid(ref Collum);
+                        Grid(Collum);
+                        Console.ReadLine();
+
+                        break;
+
+                    case "4":
+                        Console.Clear();
+                        Story();
+                        break;
+
+                    case "0":
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Make a better choice than that");
+                        Thread.Sleep(200);
+                        break;
+                }
+            } while (choice != "0");
+        }
+
+
+        static void View(Mobs[] Mobs) // To be deleted later on, for testing purposes
+        {
+            Console.Clear();
+            for (int i = 0; i < Mobs.Length; i++)
+            {
+                Console.WriteLine("Name: " + Mobs[i].name);
+                Console.WriteLine("Encounter: " + Mobs[i].encounter);
+                Console.WriteLine("Been Hit: " + Mobs[i].beenhit);
+                Console.WriteLine("Hit Mob: " + Mobs[i].hit);
+                Console.WriteLine("Evade Mob: " + Mobs[i].evade);
+                Console.WriteLine("Evade Fail: " + Mobs[i].evadefail);
+                Console.WriteLine("Killed: " + Mobs[i].killed);
+                Console.WriteLine();
+            }
+            Console.ReadLine();
+        }
+
+        static void Grid(Grid[] Collum)
+        {
+            for (int col = 0; col < Collum.Length; col++)
+            {
+                for (int row = 0; row < Collum[0].exit.Length; row++)
+                {
+                    if (Collum[col].searched[row] == true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("■ ");
+                    }
+                    else if (Collum[col].exit[row] == true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write("■ ");
+                    }
+                    else if (Collum[col].npc[row] == true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write("■ ");
+                    }
+                    else if (Collum[col].weapon[row] == true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("■ ");
+                    }
+                    else if (Collum[col].mob[row] == true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("■ ");
+                    }
+                    else if (Collum[col].food[row] == true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write("■ ");
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.Write("■ ");
+                    }
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine(Collum.Length);
+            Console.WriteLine(Collum[0].npc.Length);
+        }
     }
 }
