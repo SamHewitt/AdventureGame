@@ -18,6 +18,27 @@ namespace Astray
         public string evadefail; // Failed evading mob
         public string killed; // Death message
     }
+        struct EntitycharacterStats // Base assigned stats for chosen character
+    {
+        public double Baseattack;
+        public double Health; 
+        public double Spelldamage; // Aoe (area off effect) damage 
+        public double Speed; // (rate of attack)
+        public double Escapechance;
+        public double Dodgechance;
+        public double Bleedresistance;
+        public double Weaknessresistance;
+        public double Poisonresistance; 
+        public double Criticalchance; //chance to hit for 2x/3x/4x damage. (lower chance as u get higher damage times multiplyer)
+    }
+    //    static void CharactersMenu()
+    //{
+    //    //Berserker (Has a rage effect that once it kills an enemy it buffs strength and does a warcry that weakens enemies defences, aka bloodlust)
+    //  //  EntitycharacterStats berserker()
+
+    //}
+
+
 
     public struct Items // Items
     {
