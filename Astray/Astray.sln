@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Astray", "Astray\Astray.csproj", "{AA80995F-2C05-4882-96A6-22035F21F83A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Astray", "Astray\Astray.csproj", "{DC957909-0248-48E8-89A1-82C8C1B4EB38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AA80995F-2C05-4882-96A6-22035F21F83A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA80995F-2C05-4882-96A6-22035F21F83A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA80995F-2C05-4882-96A6-22035F21F83A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA80995F-2C05-4882-96A6-22035F21F83A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC957909-0248-48E8-89A1-82C8C1B4EB38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC957909-0248-48E8-89A1-82C8C1B4EB38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC957909-0248-48E8-89A1-82C8C1B4EB38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC957909-0248-48E8-89A1-82C8C1B4EB38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {130B3BF7-76F5-4F63-87A8-F7B38228A7AA}
+		SolutionGuid = {BFFF1767-561E-4E72-B799-FE51AE13CB6C}
 	EndGlobalSection
 EndGlobal
