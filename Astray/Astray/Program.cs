@@ -33,7 +33,7 @@ namespace Astray
     class Program
     {
         static void Main()
-        {
+        {   
             Menu();
         }
 
@@ -64,7 +64,7 @@ namespace Astray
                 Console.WriteLine("                               |   2   View Mobs         |");
                 Console.WriteLine("                               |   3   Grid Generation   |");
                 Console.WriteLine("                               |   0   Exit              |");
-                Console.WriteLine("                               |                         |");
+                Console.WriteLine("                               |   4   Story Line        |");
                 Console.WriteLine("                               |                         |");
                 Console.WriteLine("======================================================================================");
                 choice = Console.ReadLine();
@@ -76,12 +76,18 @@ namespace Astray
                     case "2":
                         View(Mobs);
                         break;
+
                     case "3":
                         GenerateGrid(ref Collum);
                         Grid(Collum);
                         Console.ReadLine();
-                        
                         break;
+
+                    case "4":
+                        Console.Clear();
+                        Story();
+                        break;
+
                     case "0":
                         break;
                     default:
@@ -233,6 +239,52 @@ namespace Astray
                 }
             } while (noexit == true);
         }
-        
+
+       public static void Story()
+        {
+            int time = 600;
+            for (int i = 0; i < 30; i++)
+            {
+                Console.WriteLine();
+            }
+            StreamReader sr = new StreamReader("MainStory.txt");
+            while (!sr.EndOfStream)
+            {
+                Console.WriteLine(sr.ReadLine());
+                Thread.Sleep(time);
+            }
+            for (int i = 0; i < 28; i++)
+            {
+                Console.WriteLine();
+                Thread.Sleep(time);
+            }
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("                   ▄▄▄        ██████ ▄▄▄█████▓ ██▀███   ▄▄▄     ▓██   ██▓");
+            Thread.Sleep(time);
+            Console.WriteLine("                  ▒████▄    ▒██    ▒ ▓  ██▒ ▓▒▓██ ▒ ██▒▒████▄    ▒██  ██▒");
+            Thread.Sleep(time);
+            Console.WriteLine("                  ▒██  ▀█▄  ░ ▓██▄   ▒ ▓██░ ▒░▓██ ░▄█ ▒▒██  ▀█▄   ▒██ ██░");
+            Thread.Sleep(time);
+            Console.WriteLine("                  ░██▄▄▄▄██   ▒   ██▒░ ▓██▓ ░ ▒██▀▀█▄  ░██▄▄▄▄██  ░ ▐██▓░");
+            Thread.Sleep(time);
+            Console.WriteLine("                   ▓█   ▓██▒▒██████▒▒  ▒██▒ ░ ░██▓ ▒██▒ ▓█   ▓██▒ ░ ██▒▓░");
+            Thread.Sleep(time);
+            Console.WriteLine("                   ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░  ▒ ░░   ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░  ██▒▒▒ ");
+            Thread.Sleep(time);
+            Console.WriteLine("                    ▒   ▒▒ ░░ ░▒  ░ ░    ░      ░▒ ░ ▒░  ▒   ▒▒ ░▓██ ░▒░ ");
+            Thread.Sleep(time);
+            Console.WriteLine("                    ░   ▒   ░  ░  ░    ░        ░░   ░   ░   ▒   ▒ ▒ ░░ ");
+            Thread.Sleep(time);
+            Console.WriteLine("                        ░  ░      ░              ░           ░  ░░ ░ ");
+            Thread.Sleep(time);
+            Console.WriteLine("                                                                 ░ ░ ");
+            Thread.Sleep(time);
+            for (int i = 0; i < 16; i++)
+            {
+                Console.WriteLine();
+                Thread.Sleep(time);
+            }
+            sr.Close();
+        }
     }
 }
