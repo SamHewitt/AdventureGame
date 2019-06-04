@@ -14,7 +14,7 @@
 --Thief (has greater chance to steal items, escape, and gold increase upon kill)
 --Ninja (greater chance to sneak attack and crit enemys)
 --Trickster (greater chance of persuasion, does bleed damage, can subdue enemys)
---NightBlade (Has a shaodow blade that cannot be broken and can 
+--Rogue (Has a hidden blade that cannot be broken and can 
 -
 -Mages(*aoe, area of effect*):
 -- Witch 

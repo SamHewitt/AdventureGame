@@ -18,6 +18,27 @@ namespace Astray
         public string evadefail; // Failed evading mob
         public string killed; // Death message
     }
+        struct EntitycharacterStats // Base assigned stats for chosen character
+    {
+        public double Baseattack;
+        public double Health; 
+        public double Spelldamage; // Aoe (area off effect) damage 
+        public double Speed; // (rate of attack)
+        public double Escapechance;
+        public double Dodgechance;
+        public double Bleedresistance;
+        public double Weaknessresistance;
+        public double Poisonresistance; 
+        public double Criticalchance; //chance to hit for 2x/3x/4x damage. (lower chance as u get higher damage times multiplyer)
+    }
+        static void CharactersMenu()
+    {
+        //Berserker (Has a rage effect that once it kills an enemy it buffs strength and does a warcry that weakens enemies defences, aka bloodlust)
+        EntitycharacterStats berserker()
+
+    }
+
+
 
     public struct Items // Items
     {
@@ -80,7 +101,7 @@ namespace Astray
                         GenerateGrid(ref Collum);
                         Grid(Collum);
                         Console.ReadLine();
-                        
+
                         break;
                     case "0":
                         break;
@@ -101,7 +122,7 @@ namespace Astray
 
             StreamReader sr = new StreamReader("mobs.txt");
             int count = 0;
-            
+
             while (!sr.EndOfStream)
             {
                 Array.Resize(ref Mobs, Mobs.Length + 1);
@@ -117,7 +138,7 @@ namespace Astray
                 count++;
             }
         }
-        
+
         static void View(Mobs[] Mobs) // To be deleted later on, for testing purposes
         {
             Console.Clear();
@@ -127,14 +148,14 @@ namespace Astray
                 Console.WriteLine("Encounter: " + Mobs[i].encounter);
                 Console.WriteLine("Been Hit: " + Mobs[i].beenhit);
                 Console.WriteLine("Hit Mob: " + Mobs[i].hit);
-                Console.WriteLine("Evade Mob: "+ Mobs[i].evade);
-                Console.WriteLine("Evade Fail: " +Mobs[i].evadefail);
+                Console.WriteLine("Evade Mob: " + Mobs[i].evade);
+                Console.WriteLine("Evade Fail: " + Mobs[i].evadefail);
                 Console.WriteLine("Killed: " + Mobs[i].killed);
                 Console.WriteLine();
             }
             Console.ReadLine();
         }
-        
+
         static void Grid(Grid[] Collum)
         {
             for (int col = 0; col < Collum.Length; col++)
@@ -233,6 +254,6 @@ namespace Astray
                 }
             } while (noexit == true);
         }
-        
+
     }
 }
