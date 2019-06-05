@@ -18,18 +18,18 @@ namespace Astray
         public string evadefail; // Failed evading mob
         public string killed; // Death message
     }
-        struct Characters // Base assigned stats for chosen character
+    struct Characters // Base assigned stats for chosen character
     {
         public string Name;
-        public double Baseattack;
-        public double Health; 
+        public double Attack;
+        public double Health;
         public double Spelldamage; // Aoe (area off effect) damage 
         public double Speed; // (rate of attack)
         public double Escapechance;
         public double Dodgechance;
         public double Bleedresistance;
         public double Weaknessresistance;
-        public double Poisonresistance; 
+        public double Poisonresistance;
         public double Criticalchance; //chance to hit for 2x/3x/4x damage. (lower chance as u get higher damage times multiplyer)
     }
     //    static void CharactersMenu()
@@ -64,11 +64,17 @@ namespace Astray
             Mobs[] Mobs = new Mobs[0];
             Items[] Items = new Items[0];
             Items[] Inventory = new Items[8];
+            for (int i = 0; i < Inventory.Length; i++)
+            {
+                Inventory[i].name = "";
+                Inventory[i].damage = 0;
+                Inventory[i].durabillity = 0;
+            }
             Grid[] Collum = new Grid[0];
             Characters[] Selection = new Characters[0];
             Load(ref Mobs, ref Items, ref Selection);
 
-            bool debug = false;
+            bool debug = true;
             if (debug == true)
             {
                 DebugMenu(Collum, Mobs, Items, Selection);
@@ -163,7 +169,7 @@ namespace Astray
             {
                 Array.Resize(ref Selection, Selection.Length + 1);
                 Selection[count].Name = cr.ReadLine();
-                Selection[count].Baseattack = Convert.ToInt32(cr.ReadLine());
+                Selection[count].Attack = Convert.ToInt32(cr.ReadLine());
                 Selection[count].Health = Convert.ToInt32(cr.ReadLine());
                 Selection[count].Spelldamage = Convert.ToInt32(cr.ReadLine()); // Aoe (area off effect) damage 
                 Selection[count].Speed = Convert.ToInt32(cr.ReadLine()); // (rate of attack)
@@ -187,12 +193,14 @@ namespace Astray
             ChooseCharacter(Character, Selection);
             GenerateGrid(ref Collum);
 
+            bool win = false;
             string choice;
             int x = Collum.Length / 2, y = Collum[1].searched.Length / 2;
 
             while (x > 0 || x < Collum.Length || y > 0 || y < Collum[1].searched.Length)
             {
                 Console.Clear();
+                Message(Collum, x, y, win);
                 Collum[x].searched[y] = true;
                 Gui(Collum, Inventory, Character, x, y);
 
@@ -202,8 +210,6 @@ namespace Astray
                     case "w":
                         if (x <= 0)
                         {
-                            Console.Clear();
-                            Console.WriteLine("Outter Bounds");
                         }
                         else
                         {
@@ -213,8 +219,6 @@ namespace Astray
                     case "a":
                         if (y <= 0)
                         {
-                            Console.Clear();
-                            Console.WriteLine("Outter Bounds");
                         }
                         else
                         {
@@ -224,8 +228,6 @@ namespace Astray
                     case "s":
                         if (x >= Collum.Length - 1)
                         {
-                            Console.Clear();
-                            Console.WriteLine("Outter Bounds");
                         }
                         else
                         {
@@ -235,8 +237,6 @@ namespace Astray
                     case "d":
                         if (y >= Collum[1].searched.Length - 1)
                         {
-                            Console.Clear();
-                            Console.WriteLine("Outter Bounds");
                         }
                         else
                         {
@@ -244,9 +244,13 @@ namespace Astray
                         }
                         break;
 
+                    case "m":
+                    case "map":
+                        Map(Collum);
+                        break;
 
-                        // commands that will be used to call the methods
-                        // each method will have an error check
+                    // commands that will be used to call the methods
+                    // each method will have an error check
 
                     // so if someone said fight, the fight method would do an if statement saying if the current sector.animal = false,
                     // meaning there is no animal, it will return, there is nothing to swing at
@@ -255,7 +259,7 @@ namespace Astray
                     case "fight":
                     case "attack":
                         break;
-                        
+
                     case "run":
                     case "leave":
                     case "evade":
@@ -266,16 +270,66 @@ namespace Astray
             }
         }
 
+        static void Message(Grid[] Collum, int x, int y, bool win)
+        {
+            int ChatHeight = 10;
+            int count = 0;
+            if (Collum[x].exit[y] == true)
+            {
+                Console.WriteLine("You have found an exit!");
+                win = true;
+                // OUTRO CODE NEEDS TO GO HERE
+                count++;
+            }
+            else if (Collum[x].npc[y] == true)
+            {
+                Console.WriteLine("You have found a NPC");
+                // NPC CODE NEEDS TO GO HERE
+                count++;
+            }
+            else
+            {
+                if (Collum[x].food[y] == true)
+                {
+                    Console.WriteLine("You have found Chosen Food");
+                    //FOOD CODE NEEDS TO GO HERE
+                    count++;
+                }
+
+                if (Collum[x].weapon[y] == true)
+                {
+                    Console.WriteLine("You have found Chosen Weapon");
+                    //WEAPON CODE NEEDS TO GO HERE
+                    count++;
+                }
+                if (Collum[x].mob[y] == true)
+                {
+                    Console.WriteLine("Chosen Mob Appeared Message");
+                    //FIGHT CODE NEEDS TO GO HERE
+                    count++;
+                }
+            }
+
+            for (int i = 0; i < ChatHeight - count; i++)
+            {
+                Console.WriteLine();
+            }
+        }
+
         static void ChooseCharacter(Characters[] Character, Characters[] Selection)
         {
             Character = Selection; // SOMEONE DO CHOOSE CHARACTER CODE HERE SO IT ISNT HARD CODED
         }
+
         static void Gui(Grid[] Collum, Items[] Inventory, Characters[] Character, int x, int y)
         {
-            Console.WriteLine();
-            for (int col = x - 5; col < x+5; col++)
+            int count = 0;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n================================================================================================");
+            for (int col = x - 5; col < x + 5; col++)
             {
-                for (int row = y - 5; row < y+5; row++)
+                Console.Write("| ");
+                for (int row = y - 5; row < y + 5; row++)
                 {
                     if (col < 0 || col > Collum.Length - 1 || row < 0 || row > Collum[1].searched.Length - 1)
                     {
@@ -287,21 +341,44 @@ namespace Astray
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Write("■ ");
+                            Console.ForegroundColor = ConsoleColor.Red;
                         }
                         else
                         {
                             Console.ForegroundColor = ConsoleColor.DarkGray;
                             Console.Write("■ ");
+                            Console.ForegroundColor = ConsoleColor.Red;
                         }
                     }
-                    
+
                 }
-                Console.WriteLine();
+                int padding = 15;
+                int padding2 = padding;
+                switch (count)
+                {
+                    case 0:
+                        Console.WriteLine($"| Inventory                             | {Character[0].Name}                          |");
+                        break;
+                    case 1:
+                        Console.WriteLine($"| 1. {Inventory[0].name.PadLeft(padding)} 2. {Inventory[1].name.PadLeft(padding)} | Health:   {Character[0].Health.ToString().PadLeft(padding2)} |");
+                        break;
+                    case 2:
+                        Console.WriteLine($"| 3. {Inventory[2].name.PadLeft(padding)} 4. {Inventory[3].name.PadLeft(padding)} | Attack:   {Character[0].Attack.ToString().PadLeft(padding2)} |");
+                        break;
+                    case 3:
+                        Console.WriteLine($"| 5. {Inventory[4].name.PadLeft(padding)} 6. {Inventory[5].name.PadLeft(padding)} | Speed:    {Character[0].Speed.ToString().PadLeft(padding2)} |");
+                        break;
+                    case 4:
+                        Console.WriteLine($"| 7. {Inventory[6].name.PadLeft(padding)} 8. {Inventory[7].name.PadLeft(padding)} | Escape %: {Character[0].Escapechance.ToString().PadLeft(padding2)} |");
+                        break;
+                    default:
+                        Console.WriteLine("|");
+                        break;
+                }
+                count++;
             }
-            Console.WriteLine(Collum.Length);
-            Console.WriteLine(Collum[0].npc.Length);
         }
-    
+
         static void GenerateGrid(ref Grid[] Collum)
         {
             bool exit = false;
@@ -318,11 +395,11 @@ namespace Astray
                         exit = true;
                         break;
                     case "2":
-                        rate = 20;
+                        rate = 10;
                         exit = true;
                         break;
                     case "3":
-                        rate = 10;
+                        rate = 3;
                         exit = true;
                         break;
                     default:
@@ -429,10 +506,32 @@ namespace Astray
             } while (noexit == true);
         }
 
+        static void Map(Grid[] Collum)
+        {
+            Console.Clear();
+            for (int col = 0; col < Collum.Length; col++)
+            {
+                for (int row = 0; row < Collum[0].exit.Length; row++)
+                {
+                    if (Collum[col].searched[row] == true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("■ ");
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.Write("■ ");
+                    }
+                }
+                Console.WriteLine();
+            }
+            Console.ReadKey();
+        }
 
         public static void Story()
         {
-            int time = 200;
+            int time = 5;
             for (int i = 0; i < 30; i++)
             {
                 Console.WriteLine();
@@ -504,7 +603,7 @@ namespace Astray
                 Console.WriteLine("                               |   1   Load              |");
                 Console.WriteLine("                               |   2   View Mobs         |");
                 Console.WriteLine("                               |   3   Grid Generation   |");
-                Console.WriteLine("                               |   0   Exit              |");
+                Console.WriteLine("                               |   0   TEST GAME              |");
                 Console.WriteLine("                               |   4   Story Line        |");
                 Console.WriteLine("                               |                         |");
                 Console.WriteLine("======================================================================================");
