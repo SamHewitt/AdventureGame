@@ -697,5 +697,24 @@ namespace Astray
             Console.WriteLine(Collum.Length);
             Console.WriteLine(Collum[0].npc.Length);
         }
+        public static void Outro()
+        {
+            int time = 5;
+            for (int i = 0; i < 30; i++)
+            {
+                Console.WriteLine();
+            }
+            StreamReader sr = new StreamReader("Outro.txt");
+            while (!sr.EndOfStream)
+            {
+                Console.WriteLine(sr.ReadLine());
+                Thread.Sleep(time);
+            }
+            for (int i = 0; i < 28; i++)
+            {
+                Console.WriteLine();
+                Thread.Sleep(time);
+            }
+        }
     }
 }
