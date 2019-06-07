@@ -131,6 +131,8 @@ namespace Astray
             StreamReader sr = new StreamReader("mobs.txt");
             int count = 0;
 
+            Array.Resize(ref Mobs, 0);
+
             while (!sr.EndOfStream) // READING IN MOBS
             {
                 Array.Resize(ref Mobs, Mobs.Length + 1);
@@ -179,6 +181,8 @@ namespace Astray
                 Selection[count].Criticalchance = Convert.ToInt32(cr.ReadLine());
                 count++;
             }
+
+            cr.Close();
 
 
         }
@@ -642,7 +646,7 @@ namespace Astray
         static void View(Mobs[] Mobs) // To be deleted later on, for testing purposes
         {
             Console.Clear();
-            for (int i = 0; i < Mobs.Length; i++)
+            for (int i = 0; i < Mobs.Length - 1; i++)
             {
                 Console.WriteLine("Name: " + Mobs[i].name);
                 Console.WriteLine("Encounter: " + Mobs[i].encounter);

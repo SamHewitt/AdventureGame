@@ -11,7 +11,7 @@ A large and aggressive Spider has crossed your path, It looks ready to bite!.The
 Bear
 A very angry bear has appreared, It doesnt like the look of you!.The bear scratches you with its paw, you lose {damage} health$You hit the Bear! it lost {damage} health$You ran! The Bear tries to chase after you but you got away!$You ran! but the bear cornered you!$You manage to kill the Bear and it dies with a roar!$The bear bites you and throws you into a tree where you die!
 Unicorn
-A Unicorn has appeared. $ $ $ $ 
+A Unicorn has appeared. $ $ $ $
 Orc
 A large angry Orc has spotted you, He doesnt like you in his territory!.The Orc strikes you with his axe! you lose {damage} health$You hit the Orc! it lost {damage} health$You ran! The Orc tries to pursue you but you got away!$You ran! But the Orc caught you!$You kill the Orc, it hits thr ground hard!$The Orc strikes you in the head with its axe, you die instantly!
 Goblin
@@ -27,12 +27,12 @@ A group of bats group togethor to form a black shape, its a Vampire!.The Vampire
 Giant
 A huge 15ft Giant has spotted you!.The Giant hits you with its fist! it hits you for {damage} health$You hit the Giant! it lost {damage} health$You ran! The Giant chases you but you get away!$You ran!The Giant blocked your path!$You manage to slay the Giant, it crashes to the ground$The Giant smashes you into a tree,you die
 Leprechaun
-A Leprechaun has appeared. $ $ $ $ 
+A Leprechaun has appeared. $ $ $ $
 Ghost
-A Ghost appeared out of thin air. $ $ $ $ 
+A Ghost appeared out of thin air. $ $ $ $
 Zombie
 A Zombie has stumbled into the area, it spots you and says "brainsss".The Zombie runs at you and bites you for {damage} health$You hit the Zombie for {damage} health$You ran! The Zombie chases you but you get away from it!$You ran, the Zombie blocked your path!$You kill the Zombie it groans and falls to the ground$The Zombie kills you and eats your brain
 Witch
 A Witch has walked out of the woods and has been watching you.The Witch casts a spell and it hits you in the chest for {damage} health$You hit the Witch for {damage} health$You ran! The Witch pursues but you get away!$You ran but the Witch blocks your path!$You kill the Witch it falls to the ground and disintegrates$The Witch hits you with a powerful spell and you die
 Illusion
-An Illusion has appeared ahead. $ $ $ $ 
+An Illusion has appeared ahead. $ $ $ $
