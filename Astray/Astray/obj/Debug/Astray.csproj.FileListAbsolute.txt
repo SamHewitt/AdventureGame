@@ -12,3 +12,10 @@ C:\Users\sjhew\Desktop\Astray Assignment\Astray\Astray\obj\Debug\Astray.csprojAs
 C:\Users\sjhew\Desktop\Astray Assignment\Astray\Astray\obj\Debug\Astray.csproj.CoreCompileInputs.cache
 C:\Users\sjhew\Desktop\Astray Assignment\Astray\Astray\obj\Debug\Astray.exe
 C:\Users\sjhew\Desktop\Astray Assignment\Astray\Astray\obj\Debug\Astray.pdb
+H:\Astray\AdventureGame\Astray\Astray\bin\Debug\Astray.exe.config
+H:\Astray\AdventureGame\Astray\Astray\bin\Debug\Astray.exe
+H:\Astray\AdventureGame\Astray\Astray\bin\Debug\Astray.pdb
+H:\Astray\AdventureGame\Astray\Astray\obj\Debug\Astray.csprojAssemblyReference.cache
+H:\Astray\AdventureGame\Astray\Astray\obj\Debug\Astray.csproj.CoreCompileInputs.cache
+H:\Astray\AdventureGame\Astray\Astray\obj\Debug\Astray.exe
+H:\Astray\AdventureGame\Astray\Astray\obj\Debug\Astray.pdb

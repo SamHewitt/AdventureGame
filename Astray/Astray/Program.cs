@@ -8,6 +8,12 @@ using System.IO;
 
 namespace Astray
 {
+    public struct Npc
+    {
+        public string name;
+        public Items[] reward;
+        public Items[] find;
+    }
     public struct Mobs // Mobs
     {
         public string name; // Mob Name
@@ -32,14 +38,6 @@ namespace Astray
         public double Poisonresistance;
         public double Criticalchance; //chance to hit for 2x/3x/4x damage. (lower chance as u get higher damage times multiplyer)
     }
-    //    static void CharactersMenu()
-    //{
-    //    //Berserker (Has a rage effect that once it kills an enemy it buffs strength and does a warcry that weakens enemies defences, aka bloodlust)
-    //  //  EntitycharacterStats berserker()
-
-    //}
-
-
 
     public struct Items // Items
     {
@@ -603,7 +601,7 @@ namespace Astray
                 Console.WriteLine("                               |   1   Load              |");
                 Console.WriteLine("                               |   2   View Mobs         |");
                 Console.WriteLine("                               |   3   Grid Generation   |");
-                Console.WriteLine("                               |   0   TEST GAME              |");
+                Console.WriteLine("                               |   0   TEST GAME         |");
                 Console.WriteLine("                               |   4   Story Line        |");
                 Console.WriteLine("                               |                         |");
                 Console.WriteLine("======================================================================================");
