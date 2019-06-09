@@ -1,0 +1,20 @@
+Relyrbe
+Rare Rolling Block Rifle
+100
+30
+Klekadora
+High Power Pistol
+100
+30
+Panestra
+Evans Repeater
+100
+30
+Jielete
+Buffalo Rifle
+100
+30
+Xoope
+Gatling Gun
+100
+100
