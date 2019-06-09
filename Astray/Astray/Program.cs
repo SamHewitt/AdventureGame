@@ -44,6 +44,8 @@ namespace Astray
         public string name;
         public int damage;
         public int durabillity;
+        public int gain;
+        public int duration;
     }
 
     public struct Grid
@@ -59,6 +61,7 @@ namespace Astray
     {
         static void Main()
         {
+            int foodstart = 0;
             Mobs[] Mobs = new Mobs[0];
             Items[] Items = new Items[0];
             Items[] Inventory = new Items[8];
@@ -70,18 +73,18 @@ namespace Astray
             }
             Grid[] Collum = new Grid[0];
             Characters[] Selection = new Characters[0];
-            Load(ref Mobs, ref Items, ref Selection);
+            Load(ref Mobs, ref Items, ref Selection, ref foodstart);
 
             bool debug = true;
             if (debug == true)
             {
-                DebugMenu(Collum, Mobs, Items, Selection);
+                DebugMenu(Collum, Mobs, Items, Selection, foodstart);
             }
             Story();
-            Menu(Mobs, Items, Inventory, Collum, Selection);
+            Menu(Mobs, Items, Inventory, Collum, Selection, foodstart);
         }
 
-        static void Menu(Mobs[] Mobs, Items[] Items, Items[] Inventory, Grid[] Collum, Characters[] Selection)
+        static void Menu(Mobs[] Mobs, Items[] Items, Items[] Inventory, Grid[] Collum, Characters[] Selection, int foodstart)
         {
             string choice;
             do // Menu will always appear at the end of any method chosen
@@ -109,7 +112,7 @@ namespace Astray
                 switch (choice)
                 {
                     case "1":
-                        Game(Mobs, Items, Collum, Inventory, Selection); // Calls Load Method
+                        Game(Mobs, Items, Collum, Inventory, Selection, foodstart); // Calls Load Method
                         break;
                     case "0":
                         break;
@@ -122,7 +125,7 @@ namespace Astray
             } while (choice != "0");
         }
 
-        static void Load(ref Mobs[] Mobs, ref Items[] items, ref Characters[] Selection) // Loads All Data
+        static void Load(ref Mobs[] Mobs, ref Items[] items, ref Characters[] Selection, ref int foodstart) // Loads All Data
         {
             // Reading in all mobs
             // Order of read in
@@ -162,9 +165,8 @@ namespace Astray
             }
             wr.Close();
 
-            StreamReader cr = new StreamReader("Characters.txt");
+            StreamReader cr = new StreamReader("Characters.txt"); // Reading in characters
             count = 0;
-
             while (!cr.EndOfStream)
             {
                 Array.Resize(ref Selection, Selection.Length + 1);
@@ -181,15 +183,27 @@ namespace Astray
                 Selection[count].Criticalchance = Convert.ToInt32(cr.ReadLine());
                 count++;
             }
-
             cr.Close();
+
+            StreamReader fr = new StreamReader("Food.txt");
+            count = items.Length;
+            foodstart = items.Length;
+            while (!fr.EndOfStream)
+            {
+                Array.Resize(ref items, items.Length + 1);
+                items[count].name = fr.ReadLine();
+                items[count].gain = Convert.ToInt32(fr.ReadLine());
+                items[count].duration = Convert.ToInt32(fr.ReadLine());
+                count++;
+            }
+            fr.Close();
 
 
         }
 
         // GAME LOOP
 
-        static void Game(Mobs[] Mobs, Items[] Items, Grid[] Collum, Items[] Inventory, Characters[] Selection)
+        static void Game(Mobs[] Mobs, Items[] Items, Grid[] Collum, Items[] Inventory, Characters[] Selection, int foodstart)
         {
             Characters[] Character = new Characters[1];
             ChooseCharacter(Character, Selection);
@@ -199,10 +213,10 @@ namespace Astray
             string choice;
             int x = Collum.Length / 2, y = Collum[1].searched.Length / 2;
 
-            while (x > 0 || x < Collum.Length || y > 0 || y < Collum[1].searched.Length)
+            while (x > 0 || x < Collum.Length || y > 0 || y < Collum[1].searched.Length || win == false)
             {
                 Console.Clear();
-                Message(Collum, x, y, win);
+                Message(Collum, x, y, win, Inventory, Items, foodstart);
                 Collum[x].searched[y] = true;
                 Gui(Collum, Inventory, Character, x, y);
 
@@ -272,10 +286,14 @@ namespace Astray
             }
         }
 
-        static void Message(Grid[] Collum, int x, int y, bool win)
+        static void Message(Grid[] Collum, int x, int y, bool win, Items[] Inventory, Items[] Items, int foodstart)
         {
+            Random rand = new Random();
+            string choice;
             int ChatHeight = 10;
             int count = 0;
+            int num = 0;
+            bool exit = false;
             if (Collum[x].exit[y] == true)
             {
                 Console.WriteLine("You have found an exit!");
@@ -293,8 +311,26 @@ namespace Astray
             {
                 if (Collum[x].food[y] == true)
                 {
-                    Console.WriteLine("You have found Chosen Food");
-                    //FOOD CODE NEEDS TO GO HERE
+                    num = rand.Next(foodstart, Items.Length);
+                    do
+                    {
+                        Console.WriteLine($"You have found {Items[num].name}");
+                        Console.WriteLine("Would you like to pick it up?");
+                        choice = Console.ReadLine();
+                        switch (choice.ToLower())
+                        {
+                            case "y":
+                            case "yes":
+                                int inv = FindFirstEmpty(Inventory);
+                                Inventory[inv] = Items[num];
+                                exit = true;
+                                break;
+                            case "n":
+                            case "no":
+                                exit = true;
+                                break;
+                        }
+                    } while (exit == false);
                     count++;
                 }
 
@@ -318,9 +354,39 @@ namespace Astray
             }
         }
 
-        static void ChooseCharacter(Characters[] Character, Characters[] Selection)
+        static int FindFirstEmpty(Items[] Inventory) // FINDS LOWEST VALUE EMPTY SLOT
         {
-            Character = Selection; // SOMEONE DO CHOOSE CHARACTER CODE HERE SO IT ISNT HARD CODED
+            int lowestempty = 0;
+            for (int i = Inventory.Length - 1; i >= 0; i--)
+            {
+                if (Inventory[i].name == "")
+                {
+                    lowestempty = i;
+                }
+            }
+            return lowestempty;
+        }
+
+        static void ChooseCharacter(Characters[] Choice, Characters[] Character)
+        {
+            Console.Clear();
+            for (int i = 0; i < Character.Length; i++)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine($"==========================================================================");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{i + 1} {Character[i].Name}");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine($"Attack:           {Character[i].Attack.ToString().PadLeft(3)}    Health:             {Character[i].Health.ToString().PadLeft(3)}");
+                Console.WriteLine($"Spell Damage:     {Character[i].Spelldamage.ToString().PadLeft(3)}    Speed:              {Character[i].Speed.ToString().PadLeft(3)}");
+                Console.WriteLine($"Escape Chance:    {Character[i].Escapechance.ToString().PadLeft(3)}    Dodge Chance:       {Character[i].Dodgechance.ToString().PadLeft(3)}");
+                Console.WriteLine($"Bleed Resistance: {Character[i].Bleedresistance.ToString().PadLeft(3)}    Weakness Resistance:{Character[i].Dodgechance.ToString().PadLeft(3)}");
+                Console.WriteLine($"Critical Chance:  {Character[i].Escapechance.ToString().PadLeft(3)}");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+            }
+            Console.WriteLine($"==========================================================================");
+            int temp = Convert.ToInt32(Console.ReadLine());
+            Choice[0] = Character[temp - 1];
         }
 
         static void Gui(Grid[] Collum, Items[] Inventory, Characters[] Character, int x, int y)
@@ -578,11 +644,31 @@ namespace Astray
             sr.Close();
         }
 
+        public static void Outro()
+        {
+            int time = 5;
+            for (int i = 0; i < 30; i++)
+            {
+                Console.WriteLine();
+            }
+            StreamReader sr = new StreamReader("Outro.txt");
+            while (!sr.EndOfStream)
+            {
+                Console.WriteLine(sr.ReadLine());
+                Thread.Sleep(time);
+            }
+            for (int i = 0; i < 28; i++)
+            {
+                Console.WriteLine();
+                Thread.Sleep(time);
+            }
+        }
+
 
         // DEBUG STUFF !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-        static void DebugMenu(Grid[] Collum, Mobs[] Mobs, Items[] items, Characters[] Selection)
+        static void DebugMenu(Grid[] Collum, Mobs[] Mobs, Items[] items, Characters[] Selection, int foodstart)
         {
             string choice;
             do // Menu will always appear at the end of any method chosen
@@ -607,13 +693,14 @@ namespace Astray
                 Console.WriteLine("                               |   3   Grid Generation   |");
                 Console.WriteLine("                               |   0   TEST GAME         |");
                 Console.WriteLine("                               |   4   Story Line        |");
+                Console.WriteLine("                               |   5   View Items        |");
                 Console.WriteLine("                               |                         |");
                 Console.WriteLine("======================================================================================");
                 choice = Console.ReadLine();
                 switch (choice)
                 {
                     case "1":
-                        Load(ref Mobs, ref items, ref Selection); // Calls Load Method
+                        Load(ref Mobs, ref items, ref Selection, ref foodstart); // Calls Load Method
                         break;
                     case "2":
                         View(Mobs);
@@ -633,6 +720,9 @@ namespace Astray
 
                     case "0":
                         break;
+                    case "5":
+                        ViewItems(items);
+                        break;
                     default:
                         Console.Clear();
                         Console.WriteLine("Make a better choice than that");
@@ -641,8 +731,6 @@ namespace Astray
                 }
             } while (choice != "0");
         }
-
-
         static void View(Mobs[] Mobs) // To be deleted later on, for testing purposes
         {
             Console.Clear();
@@ -707,24 +795,18 @@ namespace Astray
             Console.WriteLine(Collum.Length);
             Console.WriteLine(Collum[0].npc.Length);
         }
-        public static void Outro()
+
+        static void ViewItems(Items[] Items)
         {
-            int time = 5;
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < Items.Length;i++)
             {
-                Console.WriteLine();
+                Console.WriteLine($"Name: {Items[i].name}");
+                Console.WriteLine($"Damage: {Items[i].damage}");
+                Console.WriteLine($"Durabil: {Items[i].durabillity}");
+                Console.WriteLine($"Gain: {Items[i].gain}");
+                Console.WriteLine($"Duration: {Items[i].duration}\n");
             }
-            StreamReader sr = new StreamReader("Outro.txt");
-            while (!sr.EndOfStream)
-            {
-                Console.WriteLine(sr.ReadLine());
-                Thread.Sleep(time);
-            }
-            for (int i = 0; i < 28; i++)
-            {
-                Console.WriteLine();
-                Thread.Sleep(time);
-            }
+            Console.ReadLine();
         }
     }
 }
