@@ -300,7 +300,11 @@ namespace Astray
                 win = true;
                 Console.WriteLine("Would you like to leave Astray?(Y/N)");
                 choice2 = Console.ReadLine();
-                if (choice2 == "Y") ||(choice2 == ))
+                if ((choice2 == "Y") || (choice2 == "y"))
+                {
+                    Outro();
+                }
+                else
                 {
 
                 }
