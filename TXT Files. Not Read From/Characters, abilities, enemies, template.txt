@@ -58,11 +58,11 @@
 -
 -Mages:
 -
--- Witch -->	Base Attack=10; Spell Damage(Undead Curse)    =30+(weaken);                          Health=80, speed=20; Chance of escape=20; Chance to Dodge=15; Bleed Resistance=; Weakness curse resistance=40; Poison Resistance=15; Chance to Critical Strike=5;
--- Wizard -->	Base Attack=13; Spell Damage(Firestrike)      =40;            		             Health=80, speed=20; Chance of escape=15; Chance to Dodge=15; Bleed Resistance=; Weakness curse resistance=40; Poison Resistance=15; Chance to Critical Strike=5;
--- Conjurer -->	Base Attack=14; Spell Damage(Blood pact)      =27;            		             Health=90, speed=20; Chance of escape=15; Chance to Dodge=15; Bleed Resistance=; Weakness curse resistance=30; Poison Resistance=30; Chance to Critical Strike=5;
+-- Witch -->	Base Attack=10; Spell Damage(Undead Curse)    =30+(weaken);                          Health=80, speed=20; Chance of escape=20; Chance to Dodge=15; Bleed Resistance=10; Weakness curse resistance=40; Poison Resistance=15; Chance to Critical Strike=5;
+-- Wizard -->	Base Attack=13; Spell Damage(Firestrike)      =40;            		             Health=80, speed=20; Chance of escape=15; Chance to Dodge=15; Bleed Resistance=10; Weakness curse resistance=40; Poison Resistance=15; Chance to Critical Strike=5;
+-- Conjurer -->	Base Attack=14; Spell Damage(Blood pact)      =27;            		             Health=90, speed=20; Chance of escape=15; Chance to Dodge=15; Bleed Resistance=10; Weakness curse resistance=30; Poison Resistance=30; Chance to Critical Strike=5;
 -  +Special summons (summons a minion to fight for it... to be decided)
--- Druid -->	Base Attack=10; Spell Damage(Entangling roots)=33+(30% chance to snare for 3 turns); Health=95, speed=20; Chance of escape=20; Chance to Dodge=15; Bleed Resistance=; Weakness curse resistance=30; Poison Resistance=30; Chance to Critical Strike=5;
+-- Druid -->	Base Attack=10; Spell Damage(Entangling roots)=33+(30% chance to snare for 3 turns); Health=95, speed=20; Chance of escape=20; Chance to Dodge=15; Bleed Resistance=10; Weakness curse resistance=30; Poison Resistance=30; Chance to Critical Strike=5;
 -
 -Other:
 -
@@ -71,34 +71,34 @@
 -
 -
 -----------------------------------------------------------------------------------------------------------------------------------------
--Enemies
+-Enemies20
 -----------------------------------------------------------------------------------------------------------------------------------------
--Highwayman
--Leopard 
--Tiger
--Gorilla
--Snake
--Scorpion
--Spider
--Bear
--Unicorn
--Orc
--Goblin
--Cyclops
--Wizard
--Werewolf
--Vampire (lifesteal effect, weak to fire and paladins)
--Giant
--Leprichaun
--Ghost
--Zombie
--Witch (summons minions)
--Illusion
--acidic slime
--Ogre
--Dragon
--Thieves
--
+-Highwayman  --> Base Attack=8; Spell Damage=0; Health=17; speed=20; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Leopard     --> Base Attack=; Spell Damage=; Health=; speed=;  Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Tiger       --> Base Attack=; Spell Damage=; Health=; speed=;  Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Gorilla     --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Snake       --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Scorpion    --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Spider      --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Bear        --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Unicorn     --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Orc         --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Goblin      --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Cyclops     --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Wizard      --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Werewolf    --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Vampire     --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=; (lifesteal effect, weak to fire and paladins)
+-Giant       --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Leprichaun  --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Ghost       --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Zombie      --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Witch	     --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=; (summons minions)
+-Illusion    --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-acidic slime--> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Ogre        --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Dragon      --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+-Thieves     --> Base Attack=; Spell Damage=; Health=; speed=; Chance to Dodge=; Bleed Resistance=; Weakness curse resistance=; Poison Resistance=; Chance to Critical Strike=;
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -Stats and Status Effects Template
 -----------------------------------------------------------------------------------------------------------------------------------------
