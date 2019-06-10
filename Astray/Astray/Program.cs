@@ -298,9 +298,9 @@ namespace Astray
             {
                 Console.WriteLine("You have found an exit!");
                 win = true;
-                Console.WriteLine("Would you like to leave Astray?");
+                Console.WriteLine("Would you like to leave Astray?(Y/N)");
                 choice2 = Console.ReadLine();
-                if (choice2 == "Y")
+                if (choice2 == "Y") ||(choice2 == ))
                 {
 
                 }
