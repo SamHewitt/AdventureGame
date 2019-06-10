@@ -289,7 +289,7 @@ namespace Astray
         static void Message(Grid[] Collum, int x, int y, bool win, Items[] Inventory, Items[] Items, int foodstart)
         {
             Random rand = new Random();
-            string choice;
+            string choice,choice2;
             int ChatHeight = 10;
             int count = 0;
             int num = 0;
@@ -298,7 +298,16 @@ namespace Astray
             {
                 Console.WriteLine("You have found an exit!");
                 win = true;
-                // OUTRO CODE NEEDS TO GO HERE
+                Console.WriteLine("Would you like to leave Astray?(Y/N)");
+                choice2 = Console.ReadLine();
+                if ((choice2 == "Y") || (choice2 == "y"))
+                {
+                    Outro();
+                }
+                else
+                {
+                   
+                }
                 count++;
             }
             else if (Collum[x].npc[y] == true)
