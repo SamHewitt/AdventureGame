@@ -26,3 +26,10 @@ C:\Users\alber\OneDrive\Desktop\Astray coding game\AdventureGame\Astray\Astray\o
 C:\Users\alber\OneDrive\Desktop\Astray coding game\AdventureGame\Astray\Astray\obj\Debug\Astray.csproj.CoreCompileInputs.cache
 C:\Users\alber\OneDrive\Desktop\Astray coding game\AdventureGame\Astray\Astray\obj\Debug\Astray.exe
 C:\Users\alber\OneDrive\Desktop\Astray coding game\AdventureGame\Astray\Astray\obj\Debug\Astray.pdb
+C:\Users\User\Desktop\Please\AdventureGame\Astray\Astray\bin\Debug\Astray.exe.config
+C:\Users\User\Desktop\Please\AdventureGame\Astray\Astray\bin\Debug\Astray.exe
+C:\Users\User\Desktop\Please\AdventureGame\Astray\Astray\bin\Debug\Astray.pdb
+C:\Users\User\Desktop\Please\AdventureGame\Astray\Astray\obj\Debug\Astray.csprojAssemblyReference.cache
+C:\Users\User\Desktop\Please\AdventureGame\Astray\Astray\obj\Debug\Astray.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Please\AdventureGame\Astray\Astray\obj\Debug\Astray.exe
+C:\Users\User\Desktop\Please\AdventureGame\Astray\Astray\obj\Debug\Astray.pdb

@@ -337,18 +337,37 @@ namespace Astray
                             case "n":
                             case "no":
                                 exit = true;
-                                break;
+                                break;                         
                         }
+
                     } while (exit == false);
                     count++;
                 }
 
                 if (Collum[x].weapon[y] == true)
                 {
-                    Console.WriteLine("You have found Chosen Weapon");
-                    //WEAPON CODE NEEDS TO GO HERE
+                    num = rand.Next(0, Items.Length);
+                    do
+                    {
+                        Console.WriteLine($"You have found a {Items[num].name}");
+                        Console.WriteLine("Would you like to pick it up?");
+                        choice = Console.ReadLine();
+                        switch (choice.ToLower())
+                        {
+                            case "y":
+                            case "yes":
+                                int inv = FindFirstEmpty(Inventory);
+                                Inventory[inv] = Items[num];
+                                exit = true;
+                                break;
+                            case "n":
+                            case "no":
+                                exit = true;
+                                break;
+                        }
+                    } while (exit == false);
                     count++;
-                }
+                } //WEAPONS FIND CODE
                 if (Collum[x].mob[y] == true)
                 {
                     Console.WriteLine("Chosen Mob Appeared Message");
